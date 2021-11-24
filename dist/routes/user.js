@@ -5,7 +5,7 @@ var user_1 = require("../controllers/user");
 var router = express_1.Router();
 router.get('/user', user_1.getUSer);
 router.get('/user/:id');
-router.post('/user');
+router.post('/user', user_1.createUser);
 router.put('/user/:id');
 router.delete('/user/:id');
 exports.default = router;

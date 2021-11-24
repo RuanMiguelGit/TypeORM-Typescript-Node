@@ -36,7 +36,7 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
     }
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.getUSer = void 0;
+exports.createUser = exports.getUSer = void 0;
 var user_1 = require("../entity/user");
 var typeorm_1 = require("typeorm");
 exports.getUSer = function (req, res) { return __awaiter(void 0, void 0, void 0, function () {
@@ -47,6 +47,23 @@ exports.getUSer = function (req, res) { return __awaiter(void 0, void 0, void 0,
             case 1:
                 user = _a.sent();
                 return [2 /*return*/, res.status(200).json(user)];
+        }
+    });
+}); };
+exports.createUser = function (req, res) { return __awaiter(void 0, void 0, void 0, function () {
+    var newUser, data;
+    return __generator(this, function (_a) {
+        switch (_a.label) {
+            case 0: return [4 /*yield*/, typeorm_1.getRepository(user_1.User).create(req.body)];
+            case 1:
+                newUser = _a.sent();
+                return [4 /*yield*/, typeorm_1.getRepository(user_1.User).save(newUser)];
+            case 2:
+                data = _a.sent();
+                return [2 /*return*/, res.status(201).json({
+                        message: 'Usuario criado com sucesso',
+                        data: data
+                    })];
         }
     });
 }); };
