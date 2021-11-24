@@ -38,3 +38,10 @@ export const updateUser =  async (req:Request, res:Response) => {
         data: data
     })
 }
+
+export const deleteUser =  async (req:Request, res:Response) => {
+    const unique = await getRepository(User).delete(req.params.id)
+    return res.status(200).json({
+        message:"Usuario Deletado",
+    })
+}
