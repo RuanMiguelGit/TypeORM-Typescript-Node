@@ -4,7 +4,9 @@
   "description": "api made with sequelize and node js with typescript",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "tsc",
+    "start": "npm run build && node dist/index.js"
   },
   "devDependencies": {
     "@types/cors": "^2.8.6",
