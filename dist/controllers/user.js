@@ -36,7 +36,7 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
     }
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.createUser = exports.getUSer = void 0;
+exports.updateUser = exports.getUserById = exports.createUser = exports.getUSer = void 0;
 var user_1 = require("../entity/user");
 var typeorm_1 = require("typeorm");
 exports.getUSer = function (req, res) { return __awaiter(void 0, void 0, void 0, function () {
@@ -62,6 +62,44 @@ exports.createUser = function (req, res) { return __awaiter(void 0, void 0, void
                 data = _a.sent();
                 return [2 /*return*/, res.status(201).json({
                         message: 'Usuario criado com sucesso',
+                        data: data
+                    })];
+        }
+    });
+}); };
+exports.getUserById = function (req, res) { return __awaiter(void 0, void 0, void 0, function () {
+    var unique;
+    return __generator(this, function (_a) {
+        switch (_a.label) {
+            case 0: return [4 /*yield*/, typeorm_1.getRepository(user_1.User).findOne(req.params.id)];
+            case 1:
+                unique = _a.sent();
+                return [2 /*return*/, res.status(200).json({
+                        message: "Usuario encontrado",
+                        data: unique
+                    })];
+        }
+    });
+}); };
+exports.updateUser = function (req, res) { return __awaiter(void 0, void 0, void 0, function () {
+    var unique, update, data;
+    return __generator(this, function (_a) {
+        switch (_a.label) {
+            case 0: return [4 /*yield*/, typeorm_1.getRepository(user_1.User).findOne(req.params.id)];
+            case 1:
+                unique = _a.sent();
+                if (!unique)
+                    return [2 /*return*/, res.status(400).json({
+                            message: "Usuario não existe"
+                        })];
+                return [4 /*yield*/, typeorm_1.getRepository(user_1.User).merge(unique, req.body)];
+            case 2:
+                update = _a.sent();
+                return [4 /*yield*/, typeorm_1.getRepository(user_1.User).save(update)];
+            case 3:
+                data = _a.sent();
+                return [2 /*return*/, res.status(200).json({
+                        message: "Usuario Atualizado",
                         data: data
                     })];
         }
